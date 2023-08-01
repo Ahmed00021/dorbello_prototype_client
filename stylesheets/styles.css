@@ -1,0 +1,140 @@
+/* CSS styles for the navigation bar */
+.navbar {
+    background-color: #3366ff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* CSS styles for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 40px;
+}
+
+input {
+    width: 40px;
+    height: 40px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+h1 {
+    padding: 0px 10px 0px;
+}
+
+.navigation-container {
+    font-size: 40px;
+}
+
+.start-button, .navigation-container > button {
+    font-size: 40px;
+    background-color: #3366ff;
+    color: white;
+    border-radius: 15%;
+}
+
+.below-table-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.clock-container {
+    text-align: center;
+    margin-right: auto;
+    margin-left: 0;
+    height: 100px;
+    line-height: 100px;
+    width: 50%;
+    white-space: nowrap;
+}
+
+.clock {
+    font-size: 4.5rem;
+}
+
+.count-container {
+    text-align: center;
+    margin-left: auto;
+    margin-right: 0;
+    height: 100px;
+    line-height: 100px;
+    width: 50%;
+    white-space: nowrap;
+}
+
+#remaining-count, .count-text {
+    font-size: 4.5rem;
+}
+
+.row-container {
+    display: flex;
+}
+
+/* Style the tab */
+.tab {
+overflow: hidden;
+border: 1px solid #ccc;
+background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+background-color: inherit;
+float: left;
+border: none;
+outline: none;
+cursor: pointer;
+padding: 14px 16px;
+transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+display: none;
+padding: 6px 12px;
+border: 1px solid #ccc;
+border-top: none;
+}

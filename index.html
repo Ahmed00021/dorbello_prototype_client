@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dorbello</title>
+    <link href="stylesheets/styles.css" rel="stylesheet" />
+    <script src="scripts/tableScripts.js" defer></script>
+
+    <link href="stylesheets/mapStyles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <h1>Dorbello - FOR TEACHERS</h1>
+        </div>
+        <div>
+            <ul>
+                <li><a href="index.html">Teacher View</a></li>
+                <li><a href="other_pages/parentScreen.html">Parent View</a></li>
+                <li><a href="other_pages/pickupPersonScreen.html">Pickup Monitor View</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class = "row-container">
+        <div class = "clock-container">
+            <span class = "clock">02:50 PM</span>
+        </div>
+        <div class = "count-container">
+            <span class = "count-text">Kids Remaining: </span>
+            <span id = "remaining-count"></span>
+        </div>
+    </div>
+    <div class="tab">
+        <button class="tablinks" onclick="openTable(event, 'myTable')">Unchecked</button>
+        <button class="tablinks" onclick="openTable(event, 'checkedTable')">Checked</button>
+    </div>
+    
+    <table id = "myTable" class = "tabcontent">
+        <thead>
+        <tr id = 'test'>
+            <th>Student Name</th>
+            <th>ETA</th>
+            <th>Checkbox</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <table id = "checkedTable" class = "tabcontent">
+        <thead>
+        <tr id = 'checkedTest'>
+            <th>Student Name</th>
+            <th>ETA</th>
+            <th>Checkbox</th>
+            <th>Timestamp When Checked</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class = "below-table-container">
+        <button type="button"  onclick="moveToOtherRow()" class = "start-button">Start</button>
+        <span class = "navigation-container">
+            <button onclick="prevPage()" id="btn_prev">Prev</button>
+            <button onclick="nextPage()" id="btn_next">Next</button>
+            Page: <span id="page"></span>
+        </span>
+    </div>
+
+    <div class = "screens-container"> 
+    </div>
+</body>
+</html>

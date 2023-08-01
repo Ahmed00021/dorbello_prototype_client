@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dorbello</title>
+    <link href="../stylesheets/styles.css" rel="stylesheet" />
+    <script src="../scripts/tableScripts.js" defer></script>
+
+    <link href="../stylesheets/mapStyles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <h1>Dorbello - FOR PICKUP MONITOR</h1>
+        </div>
+        <div>
+            <ul>
+                <li><a href="../index.html">Teacher View</a></li>
+                <li><a href="parentScreen.html">Parent View</a></li>
+                <li><a href="pickupPersonScreen.html">Pickup Monitor View</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class = "screens-container">
+        <div class='mobile-phone'>
+            <div class = "phone-inner-container">
+                <div class = "app-container">
+                    <div class='brove'><span class='speaker'></span></div>
+                    <div class = "app-text-container">
+                        <span>DORBELLO</span>
+                    </div>
+
+                    <img src = "../images/parent-with-kids-confirmation-pic.jpg" id = "parent-with-kids-img" />
+                    <img src = "../images/parents-car.jpg" id = "parents-car-img" />
+
+                    <div class = "children-pickup-confirmation-container">
+                        <button onclick="updateETAonApp()">DONE - Child Pickup Complete</button>
+                    </div>
+
+                    <div class = "app-options-nav-bar">
+                        <button class = "app-nav-button" id = "left-button">
+                                <img src = "../images/home-icon.jpg" class = "app-nav-icon" />
+                                <span class = "app-nav-icon-text">Home</span>
+                        </button>
+                        <button class = "app-nav-button" id = "right-button">
+                                <img src = "../images/settings-icon.png" class = "app-nav-icon" />
+                                <span class = "app-nav-icon-text">Settings</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
