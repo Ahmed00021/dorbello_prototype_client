@@ -418,13 +418,13 @@ function openTable(event, tableID) {
     }
     
     window.onload = async function() {
-        await getData();
-        putDataInTable();
-        sortHTML();
         if (page == "index.html") {
+            await getData();
+            putDataInTable();
+            sortHTML();
             changePage(1);
+            getNumberOfRemainingKids();
         }
-        getNumberOfRemainingKids();
         if (page == "parentScreen.html") {
             map.scrollWheelZoom.disable();
         }
