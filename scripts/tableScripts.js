@@ -5,7 +5,7 @@ let page = path.split("/").pop();
 let numberOfRows = 0;
 let response;
 async function  getData() {
-    const data = await fetch('http://localhost:5000/')
+    const data = await fetch('dorbelloprototypeserver-production.up.railway.app')
     response = await data.json();
     console.log(response.data);
     numberOfRows = response.data.rows_from_database.length;
