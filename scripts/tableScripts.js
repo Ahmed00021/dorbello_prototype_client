@@ -13,7 +13,7 @@ async function  getData() {
 
 let totalMinutesArray = Array();
 function putDataInTable() {
-    if (page == "index.html") {
+    if (page == "index.html" || page == "/") {
         let table = document.getElementById('myTable').children[1];
 
         for (let index = 0; index < numberOfRows; index++) {
@@ -72,7 +72,7 @@ function putDataInTable() {
 }
 
 function sortHTML() {
-    if (page == "index.html") {
+    if (page == "index.html" || page == "/") {
         let sortedTotalMinutesArray = totalMinutesArray.sort(function(a, b){return (a.total) - (b.total)});
 
         for (let index = 0; index < sortedTotalMinutesArray.length; index++) {
@@ -253,7 +253,7 @@ function checkboxCheckerPrompt(event) {
 }
 
 function getNumberOfRemainingKids() {
-    if (page == "index.html") {
+    if (page == "index.html" || page == "/") {
         let remainingKids = document.getElementById("myTable").children[1].children.length;
         let countContainer = document.getElementById("remaining-count");
         if (remainingKids == undefined) {
@@ -265,7 +265,7 @@ function getNumberOfRemainingKids() {
 }
 
 function openTable(event, tableID) {
-    if (page == "index.html") {
+    if (page == "index.html" || page == "/") {
         // Declare all variables
         let i, tabcontent, tablinks;
 
@@ -342,7 +342,7 @@ function openTable(event, tableID) {
     }
 
     function numPages() {
-        if (page == "index.html") {
+        if (page == "index.html" || page == "/") {
             let table = document.getElementById("myTable");
             return Math.ceil(table.children[1].children.length / records_per_page);
         }
@@ -421,7 +421,7 @@ function openTable(event, tableID) {
         await getData();
         putDataInTable();
         sortHTML();
-        if (page == "index.html") {
+        if (page == "index.html" || page == "/") {
             changePage(1);
         }
         getNumberOfRemainingKids();
