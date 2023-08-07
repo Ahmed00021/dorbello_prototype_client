@@ -32,6 +32,16 @@
             <span id = "remaining-count"></span>
         </div>
     </div>
+
+    <div class = "below-table-container">
+        <button type="button"  onclick="moveToOtherRow()" class = "start-button">Start</button>
+        <span class = "navigation-container">
+            <button onclick="prevPage()" id="btn_prev">Prev</button>
+            <button onclick="nextPage()" id="btn_next">Next</button>
+            Page: <span id="page"></span>
+        </span>
+    </div>
+
     <div class="tab">
         <button class="tablinks" onclick="openTable(event, 'myTable')">Unchecked</button>
         <button class="tablinks" onclick="openTable(event, 'checkedTable')">Checked</button>
@@ -59,14 +69,6 @@
         </thead>
         <tbody></tbody>
     </table>
-    <div class = "below-table-container">
-        <button type="button"  onclick="moveToOtherRow()" class = "start-button">Start</button>
-        <span class = "navigation-container">
-            <button onclick="prevPage()" id="btn_prev">Prev</button>
-            <button onclick="nextPage()" id="btn_next">Next</button>
-            Page: <span id="page"></span>
-        </span>
-    </div>
 
     <div class = "screens-container"> 
     </div>

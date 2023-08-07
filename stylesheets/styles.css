@@ -66,7 +66,8 @@ h1 {
 }
 
 .below-table-container {
-    margin-top: 20px;
+    /* changed from margin-top to margin-bottom after moving buttons to top of the table */
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
 }
