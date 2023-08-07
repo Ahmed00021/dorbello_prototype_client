@@ -288,145 +288,145 @@ function openTable(event, tableID) {
     }
 }
 
-    let current_page = 1;
-    let records_per_page = 10;
+let current_page = 1;
+let records_per_page = 10;
 
-    function prevPage() {
-        if (current_page > 1) {
-            current_page--;
-            changePage(current_page);
-        }
+function prevPage() {
+    if (current_page > 1) {
+        current_page--;
+        changePage(current_page);
+    }
+}
+
+function nextPage() {
+    if (current_page < numPages()) {
+        current_page++;
+        changePage(current_page);
+    }
+}
+    
+function changePage(page) {
+    let btn_next = document.getElementById("btn_next");
+    let btn_prev = document.getElementById("btn_prev");
+    let table = document.getElementById("myTable");
+    let page_span = document.getElementById("page");
+
+    // Validate page
+    if (page < 1) page = 1;
+    if (page > numPages()) {page = numPages()};
+    
+    let tableHeading = table.children[0].children[0];
+    tableHeading.setAttribute("style", "display:none");
+    for (let index = 0; index < table.children[1].children.length; index++){
+        let row = table.children[1].children[index];
+        row.setAttribute("style", "display:none");
     }
 
-    function nextPage() {
-        if (current_page < numPages()) {
-            current_page++;
-            changePage(current_page);
-        }
+    for (let index = (page-1) * records_per_page; index < (page * records_per_page) && index < table.children[1].children.length; index++) {
+        tableHeading.removeAttribute("style", "display:table");
+        row = table.children[1].children[index];
+        row.removeAttribute("style", "display:table");
     }
-        
-    function changePage(page) {
-        let btn_next = document.getElementById("btn_next");
-        let btn_prev = document.getElementById("btn_prev");
+    page_span.innerHTML = page + "/" + numPages();
+
+    if (page == 1) {
+        btn_prev.style.visibility = "hidden";
+    } else {
+        btn_prev.style.visibility = "visible";
+    }
+
+    if (page == numPages()) {
+        btn_next.style.visibility = "hidden";
+    } else {
+        btn_next.style.visibility = "visible";
+    }
+}
+
+function numPages() {
+    if (page == "index.html") {
         let table = document.getElementById("myTable");
-        let page_span = document.getElementById("page");
-    
-        // Validate page
-        if (page < 1) page = 1;
-        if (page > numPages()) {page = numPages()};
-        
-        let tableHeading = table.children[0].children[0];
-        tableHeading.setAttribute("style", "display:none");
-        for (let index = 0; index < table.children[1].children.length; index++){
-            let row = table.children[1].children[index];
-            row.setAttribute("style", "display:none");
-        }
-
-        for (let index = (page-1) * records_per_page; index < (page * records_per_page) && index < table.children[1].children.length; index++) {
-            tableHeading.removeAttribute("style", "display:table");
-            row = table.children[1].children[index];
-            row.removeAttribute("style", "display:table");
-        }
-        page_span.innerHTML = page + "/" + numPages();
-
-        if (page == 1) {
-            btn_prev.style.visibility = "hidden";
-        } else {
-            btn_prev.style.visibility = "visible";
-        }
-
-        if (page == numPages()) {
-            btn_next.style.visibility = "hidden";
-        } else {
-            btn_next.style.visibility = "visible";
-        }
+        return Math.ceil(table.children[1].children.length / records_per_page);
     }
+}
 
-    function numPages() {
-        if (page == "index.html") {
-            let table = document.getElementById("myTable");
-            return Math.ceil(table.children[1].children.length / records_per_page);
-        }
-    }
-    
-    let added = true;
-    let done = false;
-    function getETATime() {
-        if (page == "parentScreen.html") {
-            if (done == false) {
-                let tableRowSelected = 5
-                let etaTimeText = document.getElementById("myTable").children[1].children[tableRowSelected].children[2].textContent;
-                let etaContainer = document.getElementById("eta-number-container");
-                let etaText = document.getElementById("eta-text");
-                etaContainer.textContent = etaTimeText;
-                if (etaContainer.textContent == "ARRIVED") {
-                    let placeInTable = Number(document.getElementById("myTable").children[1].children[tableRowSelected].id.replace("row", ""))
-                    etaText.textContent = "";
-                    etaContainer.textContent = `Estimate pick up time: ${placeInTable * 30} sec`;
-                    if (added == true) {
-                        var marker = L.marker([41.035454, -74.214932]).addTo(map);
-                        marker.bindPopup("<b>You</b>", {closeOnClick: false, autoClose: false}).openPopup();
-                        added = false;
-                        done = true;
-                    }
-                }
-            }
-        }
-    }
-
-    let finished = false;
-    let clicked = false;
-    function decreaseETAonApponSeperatePage() {
-        if (clicked == false) {
-            clicked = true;
+let added = true;
+let done = false;
+function getETATime() {
+    if (page == "parentScreen.html") {
+        if (done == false) {
+            let tableRowSelected = 5
+            let etaTimeText = document.getElementById("myTable").children[1].children[tableRowSelected].children[2].textContent;
             let etaContainer = document.getElementById("eta-number-container");
             let etaText = document.getElementById("eta-text");
-            etaContainer.textContent = "15 Minutes";
-            
-            let interval = setInterval(function() {
-                if (etaContainer.textContent != "1 Minutes") {
-                    etaValue = Number(etaContainer.textContent.split(" ").shift());
-                    etaValue--;
-                    etaContainer.textContent = String(etaValue) + " Minutes";
-                } else {
-                    etaText.textContent = "";
-                    // etaContainer.textContent = `Head towards pick-up 1 - estimate pick up time: ${placeInTable * 30} sec`;
-                    // etaContainer.textContent = `Estimate pick up time: ${placeInTable * 30} sec`;
-                    etaContainer.textContent = "Estimate Pickup Time: 3 Minutes";
-                    if (added == true) {
-                        var marker = L.marker([41.035454, -74.214932]).addTo(map);
-                        marker.bindPopup("<b>You</b>", {closeOnClick: false, autoClose: false}).openPopup();
-                        finished = true;
-                    }
-                    clearInterval(interval)
+            etaContainer.textContent = etaTimeText;
+            if (etaContainer.textContent == "ARRIVED") {
+                let placeInTable = Number(document.getElementById("myTable").children[1].children[tableRowSelected].id.replace("row", ""))
+                etaText.textContent = "";
+                etaContainer.textContent = `Estimate pick up time: ${placeInTable * 30} sec`;
+                if (added == true) {
+                    var marker = L.marker([41.035454, -74.214932]).addTo(map);
+                    marker.bindPopup("<b>You</b>", {closeOnClick: false, autoClose: false}).openPopup();
+                    added = false;
+                    done = true;
                 }
-            }, 3000);
-        }
-    }
-
-    let tableRowSelected1 = 4
-    function updateETAonApp() {
-        let etaContainer = document.getElementById("eta-number-container");
-        let etaText = document.getElementById("eta-text");
-        if (etaText.textContent == "") {
-            let placeInTable = Number(document.getElementById("myTable").children[1].children[tableRowSelected1].id.replace("row", ""))
-            etaContainer.textContent = `Estimated Pickup Time: ${tableRowSelected1 * 30} sec`;
-            if (tableRowSelected1 >= 0) {
-                tableRowSelected1 = tableRowSelected1 - 1;
             }
         }
+    }
+}
+
+let finished = false;
+let clicked = false;
+function decreaseETAonApponSeperatePage() {
+    if (clicked == false) {
+        clicked = true;
+        let etaContainer = document.getElementById("eta-number-container");
+        let etaText = document.getElementById("eta-text");
+        etaContainer.textContent = "15 Minutes";
         
+        let interval = setInterval(function() {
+            if (etaContainer.textContent != "1 Minutes") {
+                etaValue = Number(etaContainer.textContent.split(" ").shift());
+                etaValue--;
+                etaContainer.textContent = String(etaValue) + " Minutes";
+            } else {
+                etaText.textContent = "";
+                // etaContainer.textContent = `Head towards pick-up 1 - estimate pick up time: ${placeInTable * 30} sec`;
+                // etaContainer.textContent = `Estimate pick up time: ${placeInTable * 30} sec`;
+                etaContainer.textContent = "Estimate Pickup Time: 3 Minutes";
+                if (added == true) {
+                    var marker = L.marker([41.035454, -74.214932]).addTo(map);
+                    marker.bindPopup("<b>You</b>", {closeOnClick: false, autoClose: false}).openPopup();
+                    finished = true;
+                }
+                clearInterval(interval)
+            }
+        }, 3000);
+    }
+}
+
+let tableRowSelected1 = 4
+function updateETAonApp() {
+    let etaContainer = document.getElementById("eta-number-container");
+    let etaText = document.getElementById("eta-text");
+    if (etaText.textContent == "") {
+        let placeInTable = Number(document.getElementById("myTable").children[1].children[tableRowSelected1].id.replace("row", ""))
+        etaContainer.textContent = `Estimated Pickup Time: ${tableRowSelected1 * 30} sec`;
+        if (tableRowSelected1 >= 0) {
+            tableRowSelected1 = tableRowSelected1 - 1;
+        }
     }
     
-    window.onload = async function() {
-        await getData();
-        putDataInTable();
-        sortHTML();
-        if (page == "index.html") {
-            changePage(1);
-        }
-        getNumberOfRemainingKids();
-        if (page == "parentScreen.html") {
-            map.scrollWheelZoom.disable();
-        }
+}
+
+window.onload = async function() {
+    await getData();
+    putDataInTable();
+    sortHTML();
+    if (page == "index.html") {
+        changePage(1);
     }
+    getNumberOfRemainingKids();
+    if (page == "parentScreen.html") {
+        map.scrollWheelZoom.disable();
+    }
+}
