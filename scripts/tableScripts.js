@@ -128,31 +128,34 @@ function decrementETAs(id) {
         let column3 = document.getElementById(id).children[1];
         let columnText = column3.textContent.split(" ");
         
-        let decreasedValue;
-        if (+columnText.length === 4) {
-            if (+columnText[2] !== 0) {
-                decreasedValue = columnText[0] + " " + columnText[1] + " " + (+columnText[2] - 1) + " " + columnText[3];
-            } else if (+columnText[0] !== 0) {
-                columnText[2] = +59;
-                decreasedValue = (Number(columnText[0]) - 1) + " " + columnText[1] + " " + (columnText[2]) + " " + columnText[3];
-                if (+columnText[0] - 1 === 0) {
-                    decreasedValue = (+columnText[2]) + " " + columnText[3];
+        if (columnText != "ARRIVED") {
+
+            let decreasedValue;
+            if (+columnText.length === 4) {
+                if (+columnText[2] !== 0) {
+                    decreasedValue = columnText[0] + " " + columnText[1] + " " + (+columnText[2] - 1) + " " + columnText[3];
+                } else if (+columnText[0] !== 0) {
+                    columnText[2] = +59;
+                    decreasedValue = (Number(columnText[0]) - 1) + " " + columnText[1] + " " + (columnText[2]) + " " + columnText[3];
+                    if (+columnText[0] - 1 === 0) {
+                        decreasedValue = (+columnText[2]) + " " + columnText[3];
+                    }
+                } 
+            } else if (+columnText.length === 2) {
+                if (+columnText[0] !== 0) {
+                decreasedValue = +columnText[0] - 1 + " " + columnText[1];
                 }
-            } 
-        } else if (+columnText.length === 2) {
-            if (+columnText[0] !== 0) {
-            decreasedValue = +columnText[0] - 1 + " " + columnText[1];
             }
-        }
-        column3.textContent = decreasedValue;
+            column3.textContent = decreasedValue;
 
-        if (column3.textContent == "3 minute(s)") {
-            column3.setAttribute('style', "color:MediumSeaGreen");
-        }
+            if (column3.textContent == "3 minute(s)") {
+                column3.setAttribute('style', "color:MediumSeaGreen");
+            }
 
-        if (column3.textContent == "0 minute(s)") {
-            column3.textContent = "ARRIVED";
-            column3.setAttribute('style', "color:red");
+            if (column3.textContent == "0 minute(s)") {
+                column3.textContent = "ARRIVED";
+                column3.setAttribute('style', "color:red");
+            }
         }
 
         if ((+columnText.length == 2 && +columnText[0] != 1) || (+columnText.length == 4 && (+columnText[0] != 0 || +columnText[2] != 1))) {
@@ -418,6 +421,15 @@ function updateETAonApp() {
     
 }
 
+function makeParentsPreArrive() {
+    let table = document.getElementById("myTable");
+    let tableBody = table.children[1];
+    for (let i = 0; i < 5; i++) {
+        tableBody.children[i].children[1].textContent = "ARRIVED";
+        tableBody.children[i].children[1].setAttribute('style', "color:red");
+    }
+}
+
 window.onload = async function() {
     await getData();
     putDataInTable();
@@ -429,4 +441,5 @@ window.onload = async function() {
     if (page == "parentScreen.html") {
         map.scrollWheelZoom.disable();
     }
+    makeParentsPreArrive();
 }
